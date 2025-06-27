@@ -31,7 +31,7 @@ form.addEventListener('submit', async (e) => {
                 'Authorization': 'Bearer $CLIENT_SECRET'
             },
             data: {
-                model: 'text-davinci-003',
+                model: 'gpt-3.5-turbo-instruct',
                 prompt: `Translate the following text to ${targetLang}: ${userText}`,
                 max_tokens: 100,
                 temperature: 0.3

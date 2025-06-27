@@ -37,8 +37,16 @@ form.addEventListener('submit', async (e) => {
                 temperature: 0.3
             }
         });
-        const translation = response.choices[0].text.trim();
-        chatbox.lastChild.textContent = translation;
+        if (response && Array.isArray(response.choices) && response.choices[0] && typeof response.choices[0].text === 'string') {
+            const translation = response.choices[0].text.trim();
+            chatbox.lastChild.textContent = translation;
+        }
+        else if (response && response.error && response.error.message) {
+            chatbox.lastChild.textContent = 'Error: ' + response.error.message;
+        }
+        else {
+            chatbox.lastChild.textContent = 'Error: Unexpected response from server';
+        }
     } catch(err) {
         chatbox.lastChild.textContent = 'Error: ' + err.message;
     }
